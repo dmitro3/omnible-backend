@@ -36,6 +36,26 @@ const ContractSchema = new mongoose.Schema({
   chains: [],
   trusted: [],
   mint: [],
+  isPrivate: {
+    type: Boolean,
+    default: false
+  },
+  isPrivate: {
+    type: Boolean,
+    default: false
+  },
+  isMintable: {
+    type: Boolean,
+    default: true
+  },
+  isTradeable: {
+    type: Boolean,
+    default: true
+  },
+  isCrossBuyable: {
+    type: Boolean,
+    default: true
+  },
   date: {
     type: Date,
     default: Date.now

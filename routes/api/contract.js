@@ -63,7 +63,7 @@ router.post(
   '/create', authenticateToken,
   async (req, res) => {
 
-    const { wallet, name, symbol, amount, price, url, type, contractAddress, contentImageUrl, chains, trusted, mint} = req.body;
+    const { wallet, name, symbol, amount, price, url, type, contractAddress, contentImageUrl, chains, trusted, mint, isPrivate, isMintable, isTradeable, isCrossBuyable} = req.body;
 
     const opts = {
       overwrite: true,
@@ -98,7 +98,11 @@ router.post(
         contractAddress,
         chains,
         trusted,
-        mint
+        mint,
+        isPrivate,
+        isMintable,
+        isTradeable,
+        isCrossBuyable
       });
 
       await contractContent.save();
@@ -120,7 +124,11 @@ router.post(
         contractAddress,
         chains,
         trusted,
-        mint
+        mint,
+        isPrivate,
+        isMintable,
+        isTradeable,
+        isCrossBuyable
       });
 
       await contractContent.save();
@@ -143,7 +151,7 @@ router.put(
   '/update/:id', authenticateToken,
   async (req, res) => {
 
-    const { wallet, name, symbol, amount, price, url, type, contractAddress, contentImageUrl, chains, trusted, mint } = req.body;
+    const { wallet, name, symbol, amount, price, url, type, contractAddress, contentImageUrl, chains, trusted, mint, isPrivate, isMintable, isTradeable, isCrossBuyable } = req.body;
     const { id } = req.params;
 
     const opts = {
@@ -185,6 +193,10 @@ router.put(
         contractContent.chains = chains;
         contractContent.trusted = trusted;
         contractContent.mint = mint;
+        contractContent.isMintable = isMintable;
+        contractContent.isPrivate = isPrivate;
+        contractContent.isTradeable = isTradeable;
+        contractContent.isCrossBuyable = isCrossBuyable;
 
         await contractContent.save();
         res.json(contractContent);
@@ -205,6 +217,10 @@ router.put(
         contractContent.chains = chains;
         contractContent.trusted = trusted;
         contractContent.mint = mint;
+        contractContent.isMintable = isMintable;
+        contractContent.isPrivate = isPrivate;
+        contractContent.isTradeable = isTradeable;
+        contractContent.isCrossBuyable = isCrossBuyable;
 
         await contractContent.save();
         res.json(contractContent);
