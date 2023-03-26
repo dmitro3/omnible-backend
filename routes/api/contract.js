@@ -17,6 +17,20 @@ cloudinary.config({
 
 
 
+//Getting all contracts
+router.get("/all", async (req, res) => {
+
+  try {
+    
+    var contracts = await Contract.find()
+
+    res.status(200).json(contracts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 //Getting all contracts by the user wallet
 router.get("/", authenticateToken, async (req, res) => {
 
@@ -40,7 +54,7 @@ router.get("/", authenticateToken, async (req, res) => {
 router.get('/:contractId', async (req, res) => {
  
   try {
-    const contract = await Contract.findById(req.params.contractId).select('-_id').select('-wallet');
+    const contract = await Contract.findById(req.params.contractId).select('-_id');
     if(contract !== null) {
       res.json(contract);
     } else {
